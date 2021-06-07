@@ -1,0 +1,3 @@
+include ':app',
+        ':integration'
+rootProject.name = "RemoteCashierSDK"
