@@ -10,6 +10,9 @@ import java.util.*
 data class Receipt_V1(
     val uuid: String,
     val positions: List<Position_V1>,
+    var clientEmail: String? = null,
+    var clientPhone: String? = null,
+    var shouldPrintReceipt: Boolean = false,
     var operationType: OperationType_V1 = OperationType_V1.SELL,
     var paymentPlace: String? = null,
     var paymentAddress: String? = null,

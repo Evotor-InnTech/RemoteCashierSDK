@@ -6,5 +6,8 @@ import ru.evotor.integration.entities.receipt.Receipt_V1
 
 interface Integration {
     fun startPayment(receipt: Receipt_V1)
-    fun handlePaymentResult(registry: ActivityResultRegistry, transactionResultHandler: suspend (TransactionResult) -> Unit)
+    fun handlePaymentResult(
+        registry: ActivityResultRegistry,
+        transactionResultHandler: (TransactionResult) -> Unit
+    )
 }

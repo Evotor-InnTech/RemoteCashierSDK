@@ -15,7 +15,7 @@ class IntegrationImpl : Integration {
 
     override fun handlePaymentResult(
         registry: ActivityResultRegistry,
-        transactionResultHandler: suspend (TransactionResult) -> Unit
+        transactionResultHandler: (TransactionResult) -> Unit
     ) {
         integrationRegisterActivityForResult =
             IntegrationRegisterActivityForResult(registry, transactionResultHandler)
