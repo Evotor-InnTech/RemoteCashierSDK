@@ -17,10 +17,9 @@ class IntegrationRegisterActivityForResult(
     private var integrationActivityResultLauncher: ActivityResultLauncher<Receipt_V1> =
         registry.register(
             REGISTRY_KEY,
-            IntegrationActivityContract()
-        ) { transactionResult ->
-            transactionResultHandler(transactionResult)
-        }
+            IntegrationActivityContract(),
+            transactionResultHandler
+        )
 
     fun openIntegrationActivity(receipt: Receipt_V1) {
         integrationActivityResultLauncher.launch(receipt)
