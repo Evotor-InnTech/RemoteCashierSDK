@@ -4,21 +4,18 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
-import ru.evotor.integration.entities.TransactionResult
-import ru.evotor.integration.entities.OperationResult
-import ru.evotor.integration.entities.receipt.Receipt_V1
-import ru.evotor.integration.utils.IntegrationParams.KEY_RECEIPT_UUID
-import ru.evotor.integration.utils.IntegrationParams.KEY_RESULT
-import ru.evotor.integration.utils.IntegrationParams.RECEIPT
+import ru.evotor.integration.entities.*
 
-class IntegrationActivityContract : ActivityResultContract<Receipt_V1, TransactionResult>() {
+class IntegrationActivityContract : ActivityResultContract<IntegrationParams, TransactionResult>() {
 
     private companion object {
         const val INTENT_ACTION = "ru.evotor.evotormobile.REQUEST_RESPONSE"
+        const val KEY_RECEIPT_UUID = "RECEIPT_UUID"
+        const val KEY_RESULT = "RESULT"
     }
 
-    override fun createIntent(context: Context, receipt: Receipt_V1?): Intent =
-        Intent(INTENT_ACTION).putExtra(RECEIPT, receipt)
+    override fun createIntent(context: Context, integrationParams: IntegrationParams): Intent =
+        Intent(INTENT_ACTION).putExtra(IntegrationParams.KEY_INTEGRATION_PARAMS, integrationParams)
 
     override fun parseResult(resultCode: Int, intent: Intent?): TransactionResult =
         TransactionResult(
