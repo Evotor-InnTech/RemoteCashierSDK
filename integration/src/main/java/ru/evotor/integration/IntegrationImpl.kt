@@ -20,39 +20,39 @@ class IntegrationImpl : Integration {
     }
 
     override fun startSellV2(
-        device: Device_V2,
-        employee: Employee_V2,
         credentials: Credentials_V2,
-        resetAuthorization: Boolean,
-        receipt: Receipt_V2
+        receipt: Receipt_V2,
+        device: Device_V2?,
+        employee: Employee_V2?,
+        resetAuthorization: Boolean
     ) {
         val integrationParams = IntegrationParamsV2(
-            device,
-            employee,
-            credentials,
-            resetAuthorization,
-            receipt,
-            OperationType_V1.SELL
+            credentials = credentials,
+            receipt = receipt,
+            operationType = OperationType_V1.SELL,
+            device = device,
+            employee = employee,
+            resetAuthorization = resetAuthorization,
         )
         integrationRegisterActivityForResult?.openIntegrationActivity(integrationParams)
     }
 
     override fun startPaybackV2(
-        device: Device_V2,
-        employee: Employee_V2,
         credentials: Credentials_V2,
-        resetAuthorization: Boolean,
         receipt: Receipt_V2,
-        sellReceiptUuid: String?
+        sellReceiptUuid: String?,
+        device: Device_V2?,
+        employee: Employee_V2?,
+        resetAuthorization: Boolean
     ) {
         val integrationParams = IntegrationParamsV2(
-            device,
-            employee,
-            credentials,
-            resetAuthorization,
-            receipt,
-            OperationType_V1.PAYBACK,
-            sellReceiptUuid
+            credentials = credentials,
+            receipt = receipt,
+            sellReceiptUuid = sellReceiptUuid,
+            operationType = OperationType_V1.PAYBACK,
+            device = device,
+            employee = employee,
+            resetAuthorization = resetAuthorization,
         )
         integrationRegisterActivityForResult?.openIntegrationActivity(integrationParams)
     }

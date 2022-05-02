@@ -9,11 +9,11 @@ import ru.evotor.integration.entities.receipt.v2.Receipt_V2
 
 @Parcelize
 data class IntegrationParamsV2(
-    val device: Device_V2,
-    val employee: Employee_V2,
     val credentials: Credentials_V2,
-    val resetAuthorization: Boolean,
     val receipt: Receipt_V2,
+    val sellReceiptUuid: String? = null,
     val operationType: OperationType_V1,
-    val sellReceiptUuid: String? = null
+    val device: Device_V2?,
+    val employee: Employee_V2?,
+    val resetAuthorization: Boolean
 ) : IntegrationParams

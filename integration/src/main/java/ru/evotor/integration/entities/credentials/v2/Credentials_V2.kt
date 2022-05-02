@@ -7,5 +7,5 @@ import kotlinx.android.parcel.Parcelize
 data class Credentials_V2(
     val token: String,
     val userId: String,
-    val inn: String
+    val inn: String? = null
 ) : Parcelable

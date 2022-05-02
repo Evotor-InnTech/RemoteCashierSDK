@@ -11,19 +11,19 @@ import ru.evotor.integration.entities.receipt.v2.Receipt_V2
 interface Integration {
     fun startPaymentV1(receipt: Receipt_V1)
     fun startSellV2(
-        device: Device_V2,
-        employee: Employee_V2,
         credentials: Credentials_V2,
-        resetAuthorization: Boolean,
-        receipt: Receipt_V2
+        receipt: Receipt_V2,
+        device: Device_V2? = null,
+        employee: Employee_V2? = null,
+        resetAuthorization: Boolean = false
     )
     fun startPaybackV2(
-        device: Device_V2,
-        employee: Employee_V2,
         credentials: Credentials_V2,
-        resetAuthorization: Boolean,
         receipt: Receipt_V2,
-        sellReceiptUuid: String?
+        sellReceiptUuid: String?,
+        device: Device_V2? = null,
+        employee: Employee_V2? = null,
+        resetAuthorization: Boolean = false,
     )
     fun handlePaymentResult(
         registry: ActivityResultRegistry,
