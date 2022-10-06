@@ -5,11 +5,9 @@ import ru.evotor.integration.entities.TransactionResult
 import ru.evotor.integration.entities.credentials.v2.Credentials_V2
 import ru.evotor.integration.entities.device.v2.Device_V2
 import ru.evotor.integration.entities.employee.v2.Employee_V2
-import ru.evotor.integration.entities.receipt.Receipt_V1
 import ru.evotor.integration.entities.receipt.v2.Receipt_V2
 
 interface Integration {
-    fun startPaymentV1(receipt: Receipt_V1)
     fun startSellV2(
         credentials: Credentials_V2,
         receipt: Receipt_V2,
