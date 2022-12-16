@@ -2,53 +2,53 @@ package ru.evotor.integration
 
 import androidx.activity.result.ActivityResultRegistry
 import ru.evotor.integration.entities.*
-import ru.evotor.integration.entities.credentials.v2.Credentials_V2
-import ru.evotor.integration.entities.device.v2.Device_V2
-import ru.evotor.integration.entities.employee.v2.Employee_V2
-import ru.evotor.integration.entities.receipt.OperationType_V1
-import ru.evotor.integration.entities.receipt.v2.Receipt_V2
+import ru.evotor.integration.entities.credentials.Credentials
+import ru.evotor.integration.entities.device.Device
+import ru.evotor.integration.entities.employee.Employee
+import ru.evotor.integration.entities.receipt.OperationType
+import ru.evotor.integration.entities.receipt.Receipt
 import ru.evotor.integration.utils.IntegrationRegisterActivityForResult
 
 class IntegrationImpl : Integration {
 
     private var integrationRegisterActivityForResult: IntegrationRegisterActivityForResult? = null
 
-    override fun startSellV2(
-        credentials: Credentials_V2,
-        receipt: Receipt_V2,
-        device: Device_V2?,
-        employee: Employee_V2?,
+    override fun startSell(
+        credentials: Credentials,
+        receipt: Receipt,
+        device: Device?,
+        employee: Employee?,
         resetAuthorization: Boolean
     ) {
-        val integrationParams = IntegrationParamsV2(
+        val integrationData = IntegrationData(
             credentials = credentials,
             receipt = receipt,
-            operationType = OperationType_V1.SELL,
+            operationType = OperationType.SELL,
             device = device,
             employee = employee,
             resetAuthorization = resetAuthorization,
         )
-        integrationRegisterActivityForResult?.openIntegrationActivity(integrationParams)
+        integrationRegisterActivityForResult?.openIntegrationActivity(integrationData)
     }
 
-    override fun startPaybackV2(
-        credentials: Credentials_V2,
-        receipt: Receipt_V2,
+    override fun startPayback(
+        credentials: Credentials,
+        receipt: Receipt,
         sellReceiptUuid: String?,
-        device: Device_V2?,
-        employee: Employee_V2?,
+        device: Device?,
+        employee: Employee?,
         resetAuthorization: Boolean
     ) {
-        val integrationParams = IntegrationParamsV2(
+        val integrationData = IntegrationData(
             credentials = credentials,
             receipt = receipt,
             sellReceiptUuid = sellReceiptUuid,
-            operationType = OperationType_V1.PAYBACK,
+            operationType = OperationType.PAYBACK,
             device = device,
             employee = employee,
             resetAuthorization = resetAuthorization,
         )
-        integrationRegisterActivityForResult?.openIntegrationActivity(integrationParams)
+        integrationRegisterActivityForResult?.openIntegrationActivity(integrationData)
     }
 
     override fun handlePaymentResult(

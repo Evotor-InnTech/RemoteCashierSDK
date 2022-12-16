@@ -2,25 +2,25 @@ package ru.evotor.integration
 
 import androidx.activity.result.ActivityResultRegistry
 import ru.evotor.integration.entities.TransactionResult
-import ru.evotor.integration.entities.credentials.v2.Credentials_V2
-import ru.evotor.integration.entities.device.v2.Device_V2
-import ru.evotor.integration.entities.employee.v2.Employee_V2
-import ru.evotor.integration.entities.receipt.v2.Receipt_V2
+import ru.evotor.integration.entities.credentials.Credentials
+import ru.evotor.integration.entities.device.Device
+import ru.evotor.integration.entities.employee.Employee
+import ru.evotor.integration.entities.receipt.Receipt
 
 interface Integration {
-    fun startSellV2(
-        credentials: Credentials_V2,
-        receipt: Receipt_V2,
-        device: Device_V2? = null,
-        employee: Employee_V2? = null,
+    fun startSell(
+        credentials: Credentials,
+        receipt: Receipt,
+        device: Device? = null,
+        employee: Employee? = null,
         resetAuthorization: Boolean = false
     )
-    fun startPaybackV2(
-        credentials: Credentials_V2,
-        receipt: Receipt_V2,
+    fun startPayback(
+        credentials: Credentials,
+        receipt: Receipt,
         sellReceiptUuid: String?,
-        device: Device_V2? = null,
-        employee: Employee_V2? = null,
+        device: Device? = null,
+        employee: Employee? = null,
         resetAuthorization: Boolean = false,
     )
     fun handlePaymentResult(
