@@ -7,8 +7,8 @@ import ru.evotor.integration.utils.readVersioningData
 import ru.evotor.integration.utils.writeVersioningData
 
 data class Credentials(
-    val token: String,
-    val userId: String,
+    val token: String?,
+    val userId: String?,
     val inn: String? = null
 ) : KParcelable {
 
@@ -25,8 +25,8 @@ data class Credentials(
 
         @JvmField val CREATOR = parcelableCreator { parcel ->
             with(parcel) {
-                val token = readString().toString()
-                val userId = readString().toString()
+                val token = readString()
+                val userId = readString()
                 val inn = readString()
 
                 readVersioningData(VERSION) { dataVersion -> }
