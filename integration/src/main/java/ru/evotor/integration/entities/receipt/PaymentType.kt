@@ -1,5 +1,5 @@
 package ru.evotor.integration.entities.receipt
 
 enum class PaymentType {
-    CASH, ELECTRON, TAP_ON_PHONE
+    CASH, ELECTRON, TAP_ON_PHONE, QR_PAY
 }
