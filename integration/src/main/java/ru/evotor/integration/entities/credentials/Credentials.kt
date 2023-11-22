@@ -9,41 +9,32 @@ import ru.evotor.integration.utils.writeVersioningData
 data class Credentials(
     val token: String?,
     val userId: String?,
-    val inn: String? = null,
-    val qrId: Long? = null
+    val inn: String? = null
 ) : KParcelable {
 
     override fun writeToParcel(parcel: Parcel, flags: Int) = with(parcel) {
         writeString(token)
         writeString(userId)
         writeString(inn)
-        writeVersioningData(VERSION) {
-            qrId?.let { writeLong(it) }
-        }
+
+        writeVersioningData(VERSION) {}
     }
 
     companion object {
-        private const val VERSION = 2
+        private const val VERSION = 1
 
-        @JvmField
-        val CREATOR = parcelableCreator { parcel ->
+        @JvmField val CREATOR = parcelableCreator { parcel ->
             with(parcel) {
                 val token = readString()
                 val userId = readString()
                 val inn = readString()
-                var qrId: Long? = null
 
-                readVersioningData(VERSION) { dataVersion ->
-                    if (dataVersion >= 2) {
-                        qrId = readLong()
-                    }
-                }
+                readVersioningData(VERSION) { dataVersion -> }
 
                 return@with Credentials(
                     token,
                     userId,
-                    inn,
-                    qrId
+                    inn
                 )
             }
         }
