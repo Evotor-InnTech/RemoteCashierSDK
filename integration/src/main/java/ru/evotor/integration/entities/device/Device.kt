@@ -7,25 +7,33 @@ import ru.evotor.integration.utils.readVersioningData
 import ru.evotor.integration.utils.writeVersioningData
 
 data class Device(
-    val deviceId: String
+    val deviceId: String,
+    val qrId: Long? = null
 ) : KParcelable {
 
     override fun writeToParcel(parcel: Parcel, flags: Int) = with(parcel) {
         writeString(deviceId)
-
-        writeVersioningData(VERSION) {}
+        writeVersioningData(VERSION) {
+            qrId?.let { writeLong(it) }
+        }
     }
 
     companion object {
-        private const val VERSION = 1
+        private const val VERSION = 2
 
-        @JvmField val CREATOR = parcelableCreator { parcel ->
+        @JvmField
+        val CREATOR = parcelableCreator { parcel ->
             with(parcel) {
                 val deviceId = readString().toString()
+                var qrId: Long? = null
 
-                readVersioningData(VERSION) { dataVersion -> }
+                readVersioningData(VERSION) { dataVersion ->
+                    if (dataVersion >= 2) {
+                        qrId = readLong()
+                    }
+                }
 
-                return@with Device(deviceId)
+                return@with Device(deviceId, qrId)
             }
         }
     }
