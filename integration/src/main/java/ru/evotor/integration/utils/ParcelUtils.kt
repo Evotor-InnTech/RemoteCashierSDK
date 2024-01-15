@@ -60,6 +60,9 @@ fun Parcel.writeStringMap(map: Map<String, String>?) {
 inline fun Parcel.readVersioningData(version: Int, reader: (Int) -> Unit) {
     val dataVersion = readInt()
     val dataSize = readInt()
+    if (dataSize == 0) {
+        return
+    }
     val startDataPosition = dataPosition()
     reader(dataVersion)
     if (dataVersion > version) {

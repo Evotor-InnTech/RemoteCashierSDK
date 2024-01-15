@@ -14,12 +14,12 @@ data class Device(
     override fun writeToParcel(parcel: Parcel, flags: Int) = with(parcel) {
         writeString(deviceId)
         writeVersioningData(VERSION) {
-            qrId?.let { writeLong(it) }
+            parcel.writeValue(qrId)
         }
     }
 
     companion object {
-        private const val VERSION = 2
+        private const val VERSION = 3
 
         @JvmField
         val CREATOR = parcelableCreator { parcel ->
@@ -28,8 +28,11 @@ data class Device(
                 var qrId: Long? = null
 
                 readVersioningData(VERSION) { dataVersion ->
-                    if (dataVersion >= 2) {
+                    if (dataVersion == 2) {
                         qrId = readLong()
+                    }
+                    if (dataVersion >= 3) {
+                        qrId = parcel.readValue(Long::class.java.classLoader) as? Long
                     }
                 }
 
